@@ -17,11 +17,11 @@ LICENSE
 README.md
 Resources/Info.plist
 SECURITY.md
+Sources/BrighterDisplay/Display.swift
+Sources/BrighterDisplay/Keys.swift
+Sources/BrighterDisplay/main.swift
 Sources/Core/BrightnessRange.swift
 Sources/Core/Gamma.swift
-Sources/XDRLift/Display.swift
-Sources/XDRLift/Keys.swift
-Sources/XDRLift/main.swift
 Tests/main.swift
 ThirdParty/Lunar-LICENSE.txt
 ThirdParty/XDR-Light-LICENSE.txt

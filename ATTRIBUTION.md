@@ -1,6 +1,6 @@
 # Attribution and dependencies
 
-XDRLift source is original and MIT licensed. No third-party binary or package dependencies are incorporated. Public MIT API declarations and technique references informed the implementation; their notices are included under ThirdParty. AppKit, CoreGraphics, Metal, QuartzCore and ApplicationServices are system frameworks. The optional DisplayServices adapter loads the system framework at runtime; it does not distribute it.
+BrighterDisplay for Mac source is original and MIT licensed. No third-party binary or package dependencies are incorporated. Public MIT API declarations and technique references informed the implementation; their notices are included under ThirdParty. AppKit, CoreGraphics, Metal, QuartzCore and ApplicationServices are system frameworks. The optional DisplayServices adapter loads the system framework at runtime; it does not distribute it.
 
 BrightIntosh by Niklas R. and contributors (https://github.com/niklasr22/BrightIntosh), licensed GPL-3.0, is acknowledged as a behavioral precedent for XDR desktop brightness and gamma/HDR tradeoffs. Its source was not copied, translated, linked or incorporated. This project's MIT license does not relicense BrightIntosh.
 

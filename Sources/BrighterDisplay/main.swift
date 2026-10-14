@@ -55,14 +55,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         if let id = Bundle.main.bundleIdentifier,
            NSRunningApplication.runningApplications(withBundleIdentifier: id).contains(where: { $0.processIdentifier != ProcessInfo.processInfo.processIdentifier }) {
-            print("XDRLift already running; refusing a second display controller")
+            print("BrighterDisplay for Mac already running; refusing a second display controller")
             Darwin.exit(0)
         }
         let savedCap = UserDefaults.standard.object(forKey: XDRMaximum.preferenceKey) as? Double
         range.setMaximum(XDRMaximum.sanitized(savedCap))
         NSApp.setActivationPolicy(.accessory)
         status = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        status.button?.toolTip = "XDRLift — brightness keys, normal through extended"
+        status.button?.toolTip = "BrighterDisplay for Mac — brightness keys, normal through extended"
         status.menu = menu; menu.delegate = self
         topology = topologyKey()
         if let state = CGSessionCopyCurrentDictionary() as? [String: Any], state["CGSSessionScreenIsLocked"] as? Bool == true {
@@ -93,7 +93,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
 
     func buildMenu() {
-        menu.addItem(NSMenuItem(title: "XDRLift 0.3.0 — Preview", action: nil, keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: "BrighterDisplay for Mac 0.3.1 — Preview", action: nil, keyEquivalent: ""))
         menu.addItem(detail)
         slider.target = self; slider.action = #selector(menuLevelChanged); slider.isContinuous = true
         slider.setAccessibilityLabel("Brightness — normal through extended")
@@ -109,7 +109,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         let reset = NSMenuItem(title: "Normal / Reset", action: #selector(reset), keyEquivalent: "0"); reset.target = self; menu.addItem(reset)
         menu.addItem(.separator())
         let about = NSMenuItem(title: "About & tradeoffs…", action: #selector(about), keyEquivalent: ""); about.target = self; menu.addItem(about)
-        let quit = NSMenuItem(title: "Quit XDRLift", action: #selector(quit), keyEquivalent: "q"); quit.target = self; menu.addItem(quit)
+        let quit = NSMenuItem(title: "Quit BrighterDisplay for Mac", action: #selector(quit), keyEquivalent: "q"); quit.target = self; menu.addItem(quit)
     }
 
     func observeLifecycle() {
@@ -296,7 +296,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         else if suspension.isSuspended { condition = "Waiting for wake or unlock" }
         else if thermallyLimited { condition = "Waiting for thermal headroom" }
         else if target == nil { condition = "No supported built-in XDR display" }
-        else if !trusted { condition = "Access missing or out of date. If XDRLift is already on, remove and re-add this installed build." }
+        else if !trusted { condition = "Access missing or out of date. If BrighterDisplay for Mac is already on, remove and re-add this installed build." }
         else if keys.isRunning { condition = "Brightness keys ready · normal through extended" }
         else { condition = "Brightness-key service unavailable" }
         detail.title = extendedActive && !recoveryNeeded ? message : condition
@@ -315,10 +315,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         normalMarker?.frame.origin.x = min(320, max(22, 22 + 436 / range.maximum - 75))
         endMarker?.stringValue = range.maximum <= 1 ? "Normal maximum" : String(format: "%.2f× cap", range.maximum)
         let counts = keys.diagnostics
-        diagnosticsLabel?.stringValue = "Access: \(trusted ? "approved" : "not approved") · tap: \(keys.isEnabled ? "enabled" : "off") · v0.3.0\nBrightness up \(counts.up) · down \(counts.down) · repeats \(counts.repeats) · releases \(counts.releases)\nSwallowed \(counts.swallowed) · forwarded \(counts.forwardedBrightness) · applied \(appliedKeys) · rejected \(rejectedKeys)\nSystem events \(counts.systemEvents) · cancelled \(counts.cancelled) · tap failures \(counts.tapFailures) · last: \(counts.last)"
+        diagnosticsLabel?.stringValue = "Access: \(trusted ? "approved" : "not approved") · tap: \(keys.isEnabled ? "enabled" : "off") · v0.3.1\nBrightness up \(counts.up) · down \(counts.down) · repeats \(counts.repeats) · releases \(counts.releases)\nSwallowed \(counts.swallowed) · forwarded \(counts.forwardedBrightness) · applied \(appliedKeys) · rejected \(rejectedKeys)\nSystem events \(counts.systemEvents) · cancelled \(counts.cancelled) · tap failures \(counts.tapFailures) · last: \(counts.last)"
         let enabled = !paused && !suspension.isSuspended && !thermallyLimited && !recoveryNeeded && backendError == nil && keyboardError == nil && target != nil && brightness != nil
         slider.isEnabled = enabled; settingsSlider?.isEnabled = enabled
-        status?.button?.image = NSImage(systemSymbolName: extendedActive ? "sun.max.fill" : "sun.max", accessibilityDescription: "XDRLift")
+        status?.button?.image = NSImage(systemSymbolName: extendedActive ? "sun.max.fill" : "sun.max", accessibilityDescription: "BrighterDisplay for Mac")
     }
 
     @objc func capEdited(_ sender: NSControl) {
@@ -344,7 +344,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @objc func showSettings() {
         if let settingsWindow { settingsWindow.makeKeyAndOrderFront(nil); NSApp.activate(ignoringOtherApps: true); refresh(); return }
         let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 480, height: 530), styleMask: [.titled, .closable, .miniaturizable], backing: .buffered, defer: false)
-        window.title = "XDRLift — Settings"; window.isReleasedWhenClosed = false
+        window.title = "BrighterDisplay for Mac — Settings"; window.isReleasedWhenClosed = false
         let content = NSView(frame: NSRect(x: 0, y: 0, width: 480, height: 530)); window.contentView = content
         func text(_ value: String, _ y: Double, _ height: Double, _ size: Double) -> NSTextField {
             let label = NSTextField(wrappingLabelWithString: value); label.font = .systemFont(ofSize: size)
@@ -389,7 +389,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility") { NSWorkspace.shared.open(url) }
     }
     @objc func about() {
-        let alert = NSAlert(); alert.messageText = "XDRLift — free, open-source preview"
+        let alert = NSAlert(); alert.messageText = "BrighterDisplay for Mac — free, open-source preview"
         alert.informativeText = "Your brightness keys span normal hardware brightness and available XDR headroom. Accessibility approval is required once; no separate enabling step. Launch starts at normal brightness. Reset, quit, sleep and lock restore the owned color table. Extended output uses EDR and gamma scaling; it can drain battery, add heat, clip HDR and change color accuracy. Do not combine with other gamma utilities. Values are relative, not measured nits. No capture, network, login item, daemon or paid gates."
         alert.runModal()
     }
@@ -398,7 +398,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         keys.stop()
         guard restoreNormal("Normal — quitting") else {
             let alert = NSAlert(); alert.messageText = "Display reset needs another attempt"
-            alert.informativeText = "XDRLift could not verify restoration. Keep it open and use Normal / Reset to retry."
+            alert.informativeText = "BrighterDisplay for Mac could not verify restoration. Keep it open and use Normal / Reset to retry."
             alert.addButton(withTitle: "Keep open"); alert.addButton(withTitle: "Quit anyway")
             return alert.runModal() == .alertSecondButtonReturn ? .terminateNow : .terminateCancel
         }

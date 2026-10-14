@@ -1,6 +1,6 @@
 # Automatic-update design
 
-Status: proposed for a subsequent release. **0.3.0 contains no updater, feed, update key, background network checks, or automatic installation.** Its exact accepted binary is preserved. The first updater-enabled build will require a manual installation.
+Status: proposed for a subsequent release. **0.3.1 contains no updater, feed, update key, background network checks, or automatic installation.** The original accepted XDRLift 0.3.0 installation remains unchanged during this work. The first updater-enabled build will require a manual installation.
 
 Use the established [Sparkle 2 framework](https://sparkle-project.org/documentation/) instead of a custom downloader that replaces executables. Pin the framework version and verify its official distribution and license before integration. Embed the public Ed25519 key in the app, serve a stable HTTPS appcast, and publish versioned signed archives as GitHub release assets. Consider signed feeds and validation before extraction with the selected Sparkle version. A checksum alone is not publisher authentication.
 

@@ -106,7 +106,7 @@ final class BrightnessKeys {
             while self.current(token) { CFRunLoopRunInMode(.defaultMode, 0.25, false) }
             CFRunLoopRemoveSource(loop, source, .commonModes)
         }
-        worker.name = "XDRLift brightness keys"; worker.qualityOfService = .userInteractive
+        worker.name = "BrighterDisplay for Mac brightness keys"; worker.qualityOfService = .userInteractive
         thread = worker; worker.start()
         guard ready.wait(timeout: .now() + 2) == .success else { stop(); return false }
         CGEvent.tapEnable(tap: port, enable: true)

@@ -1,8 +1,8 @@
-# XDRLift development
+# BrighterDisplay for Mac development
 
 Keep the implementation original and MIT compatible. Never copy GPL code and label it MIT. Preserve third-party notices and document provenance.
 
-Build: `./scripts/build.sh`. Test: `./scripts/test.sh`. Package: `./scripts/package.sh`. Use modest compiler concurrency. `Sources/Core` contains dependency-free safety and interaction logic; `Sources/XDRLift` integrates macOS APIs.
+Build: `./scripts/build.sh`. Test: `./scripts/test.sh`. Package: `./scripts/package.sh`. Use modest compiler concurrency. `Sources/Core` contains dependency-free safety and interaction logic; `Sources/BrighterDisplay` integrates macOS APIs.
 
 No paid gates, telemetry, captures, automatic login agent, privileged daemon, thermal bypass, permission changes, or security bypass. Only the user grants macOS control access. Never read private keys or create signing credentials without explicit approval.
 

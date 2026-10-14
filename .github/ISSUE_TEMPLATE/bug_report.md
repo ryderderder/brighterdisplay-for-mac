@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report reproducible behavior in XDRLift
+about: Report reproducible behavior in BrighterDisplay for Mac
 ---
 
 **App version, macOS version, Mac and display model**
