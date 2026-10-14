@@ -40,7 +40,7 @@ The app attempts restoration on reset, pause, quit, sleep, lock, inactive sessio
 
 ## Build and test
 
-Install Apple's Command Line Tools or Xcode, then run on macOS:
+Install Apple's Command Line Tools or Xcode with **Swift 6.4 or newer**, then run on macOS:
 
 ```sh
 ./scripts/test.sh
@@ -48,7 +48,7 @@ Install Apple's Command Line Tools or Xcode, then run on macOS:
 open dist/XDRLift.app
 ```
 
-The build uses one compiler invocation, Swift 5 language mode, a local module cache, and an arm64/macOS 13 deployment target. No package dependencies or network downloads are required. The tested local toolchain is Swift 6.4. Builds are repeatable from source, but not guaranteed byte-identical across SDK/compiler versions.
+The build uses one compiler invocation, Swift 5 language mode, a local module cache, and an arm64/macOS 13 deployment target. No package dependencies or network downloads are required. The tested local toolchain is Swift 6.4. CI uses the Xcode 27 runner; older Swift toolchains may hit a type-checking limit in the gamma comparison. Builds are repeatable from source, but not guaranteed byte-identical across SDK/compiler versions.
 
 `./scripts/package.sh` tests, builds, and produces app/source ZIPs plus SHA-256 checksums from an explicit file manifest. It does not install or publish anything. CI tests the dependency-free core and builds/verifies a separate app; it does not manipulate a display or prove physical keyboard behavior.
 
