@@ -1,0 +1,28 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  core-and-build:
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Core safety and interaction tests
+        run: ./scripts/test.sh
+      - name: Build and verify arm64 app
+        run: ./scripts/build.sh
+      - name: Validate source manifest and shell scripts
+        run: |
+          while IFS= read -r path; do test -f "$path" || exit 1; done < .release-files
+          for script in scripts/*.sh; do sh -n "$script"; done
+          plutil -lint Resources/Info.plist

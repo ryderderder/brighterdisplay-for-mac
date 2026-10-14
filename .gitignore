@@ -1,0 +1,15 @@
+# Local outputs and private evidence
+.build/
+dist/
+evidence/
+AUDIT-LOG.md
+.DS_Store
+*.log
+*.dSYM/
+*.xcuserstate
+xcuserdata/
+.env
+.env.*
+*.p12
+*.p8
+*.key
